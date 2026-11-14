@@ -4,14 +4,10 @@
 require_once 'conexion.php';
 
 $sql = "SELECT id, titulo, descripcion, prioridad, estado, email_cliente
-        FROM incidencias
-        WHERE estado != :estado";
+        FROM incidencias";
 
 $stmt = $pdo->prepare($sql);
-
-$stmt->execute([
-    ':estado' => 'Resuelta'
-]);
+$stmt->execute();
 
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -68,7 +64,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if (empty($incidencias)): ?>
 
                 <tr>
-                    <td colspan="7">No hay incidencias activas.</td>
+                    <td colspan="7">No hay incidencias.</td>
                 </tr>
 
             <?php else: ?>
