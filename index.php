@@ -3,8 +3,11 @@
 
 require_once 'conexion.php';
 
-$sql = "SELECT id, titulo, descripcion, prioridad, estado, email_cliente
-        FROM incidencias";
+$sql = "SELECT incidencias.id, incidencias.titulo, incidencias.descripcion,
+               incidencias.prioridad, incidencias.estado, incidencias.email_cliente,
+               incidencias.tecnico_id, tecnicos.nombre AS tecnico_nombre
+        FROM incidencias
+        LEFT JOIN tecnicos ON incidencias.tecnico_id = tecnicos.id";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -55,6 +58,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Prioridad</th>
                 <th>Estado</th>
                 <th>Email cliente</th>
+                <th>Técnico responsable</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -64,7 +68,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if (empty($incidencias)): ?>
 
                 <tr>
-                    <td colspan="7">No hay incidencias.</td>
+                    <td colspan="8">No hay incidencias.</td>
                 </tr>
 
             <?php else: ?>
@@ -84,6 +88,16 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><?= htmlspecialchars($incidencia['estado']) ?></td>
 
                         <td><?= htmlspecialchars($incidencia['email_cliente']) ?></td>
+
+                        <td>
+                            <?= htmlspecialchars($incidencia['tecnico_nombre'] ?? 'Sin asignar') ?>
+                            <form method="get" action="asignar_incidencia.php">
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($incidencia['id']) ?>">
+                                <button type="submit">
+                                    <?= $incidencia['tecnico_id'] === null ? 'Asignar técnico' : 'Cambiar técnico' ?>
+                                </button>
+                            </form>
+                        </td>
 
                         <td>
                             <a href="editar_incidencia.php?id=<?= $incidencia['id'] ?>">
