@@ -13,7 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($email === false || $email === null) {
 
-        $error = "El correo electrónico no es válido.";
+        $error = "El correo electrónico no es válido. Usa un formato como nombre@gmail.com o nombre@hotmail.com.";
+
+    } elseif (preg_match('/@(gmail\.com|hotmail\.com)$/i', $email) !== 1) {
+
+        $error = "El correo debe terminar en @gmail.com o @hotmail.com. Ejemplo: nombre@gmail.com.";
+
+    } elseif (!in_array($prioridad, ['Baja', 'Media', 'Alta'], true)) {
+
+        $error = "Selecciona una prioridad válida.";
 
     } elseif (empty($titulo) || empty($descripcion) || empty($prioridad)) {
 
@@ -82,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><br>
 
         <label>Email del cliente:</label><br>
-        <input type="email" name="email_cliente" required>
+        <input type="email" name="email_cliente" pattern=".+@(gmail\.com|hotmail\.com)" title="El correo debe terminar en @gmail.com o @hotmail.com. Ejemplo: nombre@gmail.com." required>
         <br><br>
 
         <button type="submit">Guardar incidencia</button>
