@@ -21,7 +21,6 @@ $clases_estado = [
     'Pendiente' => 'pendiente',
     'En Proceso' => 'en-proceso',
     'Resuelta' => 'resuelta',
-    'Resuelto' => 'resuelta'
 ];
 
 ?>
