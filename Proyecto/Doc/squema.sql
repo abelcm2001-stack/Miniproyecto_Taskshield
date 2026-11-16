@@ -6,7 +6,7 @@ CREATE TABLE tecnicos (
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL,
     tareas_activas INT NOT NULL DEFAULT 0
-) 
+);
 
 CREATE TABLE incidencias (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,7 +18,7 @@ CREATE TABLE incidencias (
     tecnico_id INT DEFAULT NULL,
 
     FOREIGN KEY (tecnico_id) REFERENCES tecnicos(id)
-) 
+); 
 
 INSERT INTO tecnicos (id, nombre, email, tareas_activas) VALUES
     (1, 'Ana Garcia', 'ana.garcia@example.com', 1),
