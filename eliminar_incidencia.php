@@ -65,8 +65,6 @@ $estado = htmlspecialchars($incidencia['estado']);
 
     <h1>Eliminar incidencia nº <?= $id_incidencia ?></h1>
 
-    <a href="index.php">Volver al listado</a>
-
     <p><strong>Título:</strong> <?= $titulo ?></p>
     <p><strong>Descripción:</strong> <?= $descripcion ?></p>
     <p><strong>Estado:</strong> <?= $estado ?></p>

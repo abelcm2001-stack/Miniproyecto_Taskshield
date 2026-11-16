@@ -144,8 +144,6 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
 
     <h1><?= $es_reasignacion ? 'Cambiar técnico' : 'Asignar incidencia' ?></h1>
 
-    <a href="index.php">Volver al listado</a>
-
     <p><strong>Incidencia:</strong> <?= $titulo ?></p>
 
     <?php if (!empty($error)): ?>
@@ -177,7 +175,10 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
         <button type="submit">Guardar responsable</button>
 
     </form>
-
+    
+    <br><br>
+        
+    <a href="index.php">Volver al listado</a>
 </body>
 
 </html>

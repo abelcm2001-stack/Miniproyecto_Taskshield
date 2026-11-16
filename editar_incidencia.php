@@ -61,8 +61,6 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
 
     <h1>Editar incidencia nº <?= $id_incidencia ?></h1>
 
-    <a href="index.php">Volver al listado</a>
-
     <p><strong>Título:</strong> <?= $titulo ?></p>
     <p><strong>Descripción:</strong> <?= $descripcion ?></p>
     <p><strong>Estado actual:</strong> <?= $estado_actual ?></p>
@@ -80,8 +78,10 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
 
         <button type="submit">Guardar cambios</button>
 
-    </form>
-
+    </form> 
+        <br><br>
+        <a href="index.php">Volver al listado</a>
+        
 </body>
 
 </html>
