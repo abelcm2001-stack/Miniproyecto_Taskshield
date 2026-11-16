@@ -57,6 +57,7 @@ $estado = htmlspecialchars($incidencia['estado']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar incidencia</title>
+    <link rel="stylesheet" href="estilos.css">
 
 </head>
 
@@ -71,7 +72,7 @@ $estado = htmlspecialchars($incidencia['estado']);
     <h3>¿Estás seguro de que quieres eliminar esta incidencia?</h3>
 
     <?php if (!empty($mensaje)): ?>
-        <p style="color: red;"><?= htmlspecialchars($mensaje) ?></p>
+        <p class="mensaje-error"><?= htmlspecialchars($mensaje) ?></p>
     <?php endif; ?>
 
     <form method="post" action="eliminar_incidencia.php?id=<?= $id_incidencia ?>">

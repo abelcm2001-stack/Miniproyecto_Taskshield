@@ -67,6 +67,7 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar incidencia</title>
+    <link rel="stylesheet" href="estilos.css">
 
 </head>
 
@@ -89,7 +90,7 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
             </select>
             <!-- Si no se puede guardar, mostramos el aviso junto al selector. -->
             <?php if ($error !== ''): ?>
-                <span style="color: red; margin-left: 8px;"><?= htmlspecialchars($error) ?></span>
+                <span class="mensaje-error"><?= htmlspecialchars($error) ?></span>
             <?php endif; ?>
         </p>
 

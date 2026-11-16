@@ -140,6 +140,7 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $es_reasignacion ? 'Cambiar técnico' : 'Asignar incidencia' ?></title>
+    <link rel="stylesheet" href="estilos.css">
 
 </head>
 
@@ -150,7 +151,7 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
     <p><strong>Incidencia:</strong> <?= $titulo ?></p>
 
     <?php if (!empty($error)): ?>
-        <p style="color: red;">
+        <p class="mensaje-error">
             <?= htmlspecialchars($error) ?>
         </p>
     <?php endif; ?>

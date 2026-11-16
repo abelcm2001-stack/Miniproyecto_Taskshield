@@ -16,6 +16,14 @@ $stmt->execute();
 // Guardamos los resultados para mostrarlos más abajo.
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Estas clases sirven para dar un color distinto a cada estado.
+$clases_estado = [
+    'Pendiente' => 'pendiente',
+    'En Proceso' => 'en-proceso',
+    'Resuelta' => 'resuelta',
+    'Resuelto' => 'resuelta'
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -26,19 +34,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incidencias</title>
-
-    <style>
-
-        table {
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 
 </head>
 
@@ -47,8 +43,6 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1>Gestión de incidencias</h1>
 
     <a href="nueva_incidencia.php">Crear nueva incidencia</a>
-
-    <br><br>
 
     <table>
 
@@ -89,7 +83,11 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <td><?= htmlspecialchars($incidencia['prioridad']) ?></td>
 
-                        <td><?= htmlspecialchars($incidencia['estado']) ?></td>
+                        <td>
+                            <span class="estado estado-<?= htmlspecialchars($clases_estado[$incidencia['estado']] ?? 'desconocido') ?>">
+                                <?= htmlspecialchars($incidencia['estado']) ?>
+                            </span>
+                        </td>
 
                         <td><?= htmlspecialchars($incidencia['email_cliente']) ?></td>
 
@@ -104,15 +102,10 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
 
                         <td>
-                            <a href="editar_incidencia.php?id=<?= $incidencia['id'] ?>">
-                                Editar
-                            </a>
-
-                            |
-
-                            <a href="eliminar_incidencia.php?id=<?= $incidencia['id'] ?>">
-                                Eliminar
-                            </a>
+                            <div class="acciones">
+                                <a class="boton accion-editar" href="editar_incidencia.php?id=<?= $incidencia['id'] ?>">Editar</a>
+                                <a class="boton accion-eliminar" href="eliminar_incidencia.php?id=<?= $incidencia['id'] ?>">Eliminar</a>
+                            </div>
                         </td>
 
                     </tr>

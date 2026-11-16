@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva incidencia</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Si algún dato no pasa la validación, mostramos aquí el aviso. -->
     <?php if (!empty($error)): ?>
-        <p style="color: red;">
+        <p class="mensaje-error">
             <?= htmlspecialchars($error) ?>
         </p>
     <?php endif; ?>

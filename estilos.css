@@ -1,0 +1,259 @@
+:root {
+    --azul: #2563eb;
+    --azul-oscuro: #1d4ed8;
+    --fondo: #f3f6fb;
+    --texto: #1f2937;
+    --borde: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    margin: 0 0 24px;
+    color: #172554;
+    font-size: 30px;
+}
+
+h3 {
+    margin-top: 28px;
+}
+
+a {
+    color: var(--azul-oscuro);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button,
+.boton,
+body > a[href="index.php"],
+body > a[href="nueva_incidencia.php"],
+form > a[href="index.php"] {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--azul);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover,
+.boton:hover,
+body > a[href="index.php"]:hover,
+body > a[href="nueva_incidencia.php"]:hover,
+form > a[href="index.php"]:hover {
+    background: var(--azul-oscuro);
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+body > a[href="nueva_incidencia.php"] {
+    margin-bottom: 20px;
+}
+
+form {
+    margin: 0;
+}
+
+body > form {
+    max-width: 620px;
+    margin-top: 20px;
+    padding: 24px;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+body > form label {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+body > form input:not([type="hidden"]),
+body > form select,
+body > form textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--texto);
+    font: inherit;
+}
+
+body > form input:focus,
+body > form select:focus,
+body > form textarea:focus {
+    border-color: var(--azul);
+    outline: 3px solid rgba(37, 99, 235, 0.15);
+}
+
+body > form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+body > form button {
+    margin-top: 8px;
+}
+
+body > form button[name="confirmar"] {
+    background: #dc2626;
+}
+
+body > form button[name="confirmar"]:hover {
+    background: #b91c1c;
+}
+
+form > a[href="index.php"] {
+    margin-left: 8px;
+    background: #64748b;
+}
+
+form > a[href="index.php"]:hover {
+    background: #475569;
+}
+
+.mensaje-error {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+span.mensaje-error {
+    margin-left: 8px;
+}
+
+body > form p.mensaje-error {
+    display: block;
+    margin-top: 12px;
+}
+
+table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+th,
+td {
+    padding: 13px 15px;
+    border-bottom: 1px solid var(--borde);
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #1e3a8a;
+    color: #fff;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+tbody tr:hover {
+    background: #eff6ff;
+}
+
+td form {
+    margin-top: 8px;
+}
+
+td button {
+    padding: 7px 10px;
+    font-size: 13px;
+}
+
+.acciones {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.boton {
+    padding: 7px 11px;
+    font-size: 13px;
+}
+
+.accion-eliminar {
+    background: #dc2626;
+}
+
+.accion-eliminar:hover {
+    background: #b91c1c;
+}
+
+.estado {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.estado-pendiente,
+.estado-desconocido {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.estado-en-proceso {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.estado-resuelta {
+    background: #dcfce7;
+    color: #166534;
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 28px 16px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    body > form {
+        padding: 18px;
+    }
+
+    th,
+    td {
+        padding: 10px 12px;
+    }
+}
