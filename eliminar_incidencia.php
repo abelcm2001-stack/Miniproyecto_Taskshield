@@ -21,6 +21,7 @@ if (!$incidencia) {
 
 $mensaje = "";
 
+// Solo borramos la incidencia cuando se confirma desde el formulario.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['confirmar'])) {
@@ -33,14 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->rowCount() > 0) {
             header("Location: index.php");
             exit;
-        } else {
-            $mensaje = "No se ha podido eliminar la incidencia.";
-        }
 
     } else {
         header("Location: index.php");
         exit;
     }
+}
 }
 
 $id_incidencia = htmlspecialchars($incidencia['id']);

@@ -3,6 +3,7 @@
 
 require_once 'conexion.php';
 
+// Buscamos las incidencias junto al nombre del técnico que tiene asignado cada una.
 $sql = "SELECT incidencias.id, incidencias.titulo, incidencias.descripcion,
                incidencias.prioridad, incidencias.estado, incidencias.email_cliente,
                incidencias.tecnico_id, tecnicos.nombre AS tecnico_nombre
@@ -12,6 +13,7 @@ $sql = "SELECT incidencias.id, incidencias.titulo, incidencias.descripcion,
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
+// Guardamos los resultados para mostrarlos más abajo.
 $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -65,6 +67,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <tbody>
 
+            <!-- Si no hay incidencias, mostramos un aviso; si las hay, enseñamos sus datos. -->
             <?php if (empty($incidencias)): ?>
 
                 <tr>
@@ -77,6 +80,7 @@ $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <tr>
 
+                        <!-- Escapamos los datos antes de mostrarlos en la página. -->
                         <td><?= htmlspecialchars($incidencia['id']) ?></td>
 
                         <td><?= htmlspecialchars($incidencia['titulo']) ?></td>

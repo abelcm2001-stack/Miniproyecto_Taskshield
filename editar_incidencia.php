@@ -2,6 +2,7 @@
 
 require_once 'conexion.php';
 
+// Comprobamos que el ID de la URL sea válido.
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
@@ -21,6 +22,7 @@ if (!$incidencia) {
 $error = "";
 $estado_seleccionado = $incidencia['estado'];
 
+// Guardamos solo los estados permitidos.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $estado = filter_input(INPUT_POST, 'estado', FILTER_UNSAFE_RAW);
@@ -28,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (in_array($estado, ['Pendiente', 'En Proceso', 'Resuelta'], true)) {
         $estado_seleccionado = $estado;
 
+        // Para ponerla en proceso, primero tiene que tener un técnico asignado.
         if ($estado === 'En Proceso' && $incidencia['tecnico_id'] === null) {
             $error = "No puedes poner la incidencia en proceso si no tiene un técnico asignado.";
         } else {
@@ -84,6 +87,7 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
                 <option value="En Proceso" <?= $sel_en_proceso ?>>En Proceso</option>
                 <option value="Resuelta" <?= $sel_resuelta ?>>Resuelta</option>
             </select>
+            <!-- Si no se puede guardar, mostramos el aviso junto al selector. -->
             <?php if ($error !== ''): ?>
                 <span style="color: red; margin-left: 8px;"><?= htmlspecialchars($error) ?></span>
             <?php endif; ?>

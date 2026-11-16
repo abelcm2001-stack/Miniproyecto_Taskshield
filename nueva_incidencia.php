@@ -4,6 +4,7 @@ require_once 'conexion.php';
 
 $error = "";
 
+// Revisamos los datos del formulario antes de guardar la incidencia.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -29,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     } else {
 
+        // Si todo está bien, guardamos la incidencia y volvemos al inicio.
         $sql = "INSERT INTO incidencias 
                 (titulo, descripcion, prioridad, email_cliente, estado)
                 VALUES (:titulo, :descripcion, :prioridad, :email, 'Pendiente')";
@@ -64,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>Registrar nueva incidencia</h1>
 
+    <!-- Si algún dato no pasa la validación, mostramos aquí el aviso. -->
     <?php if (!empty($error)): ?>
         <p style="color: red;">
             <?= htmlspecialchars($error) ?>

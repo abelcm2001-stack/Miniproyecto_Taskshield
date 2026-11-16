@@ -27,6 +27,7 @@ $tecnicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $error = "";
 $tecnico_seleccionado = $incidencia['tecnico_id'] === null ? '' : (string) $incidencia['tecnico_id'];
 
+// Comprobamos que el técnico elegido exista antes de hacer el cambio.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $tecnico_enviado = filter_input(INPUT_POST, 'tecnico_id', FILTER_UNSAFE_RAW);
@@ -71,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
+            // Juntamos los cambios para que no se guarde solo una parte.
             $pdo->beginTransaction();
 
             if ($tecnico_anterior !== null) {
@@ -114,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
         } catch (PDOException $e) {
+            // Si algo falla, deshacemos los cambios que se habían hecho.
             if ($pdo->inTransaction()) {
                 $pdo->rollBack();
             }
