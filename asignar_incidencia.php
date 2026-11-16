@@ -91,10 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([':id' => $tecnico_id]);
             }
 
-            $estado = $incidencia['estado'];
-            if ($tecnico_anterior === null && $tecnico_id !== null) {
-                $estado = 'En Proceso';
-            }
+            $estado = $tecnico_id !== null ? 'En Proceso' : $incidencia['estado'];
 
             $stmt = $pdo->prepare("
                 UPDATE incidencias
@@ -139,13 +136,13 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $es_reasignacion ? 'Cambiar responsable' : 'Asignar incidencia' ?></title>
+    <title><?= $es_reasignacion ? 'Cambiar técnico' : 'Asignar incidencia' ?></title>
 
 </head>
 
 <body>
 
-    <h1><?= $es_reasignacion ? 'Cambiar responsable' : 'Asignar incidencia' ?></h1>
+    <h1><?= $es_reasignacion ? 'Cambiar técnico' : 'Asignar incidencia' ?></h1>
 
     <a href="index.php">Volver al listado</a>
 
