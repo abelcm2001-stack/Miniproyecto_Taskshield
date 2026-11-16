@@ -178,7 +178,7 @@ $es_reasignacion = $incidencia['tecnico_id'] !== null;
     
     <br><br>
         
-    <a href="index.php">Volver al listado</a>
+    <a href="index.php">Volver al inicio</a>
 </body>
 
 </html>

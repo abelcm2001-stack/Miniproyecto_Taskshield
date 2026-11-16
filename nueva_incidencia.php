@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <br>
 
-    <a href="index.php">Volver al listado</a>
+    <a href="index.php">Volver al inicio</a>
 
 </body>
 

@@ -9,7 +9,7 @@ if (!$id) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT id, titulo, descripcion, estado FROM incidencias WHERE id = :id");
+$stmt = $pdo->prepare("SELECT id, titulo, descripcion, estado, tecnico_id FROM incidencias WHERE id = :id");
 $stmt->execute([':id' => $id]);
 $incidencia = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -18,26 +18,36 @@ if (!$incidencia) {
     exit;
 }
 
+$error = "";
+$estado_seleccionado = $incidencia['estado'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_SPECIAL_CHARS);
+    $estado = filter_input(INPUT_POST, 'estado', FILTER_UNSAFE_RAW);
 
-    if ($estado === 'Pendiente' || $estado === 'En Proceso' || $estado === 'Resuelta') {
+    if (in_array($estado, ['Pendiente', 'En Proceso', 'Resuelta'], true)) {
+        $estado_seleccionado = $estado;
 
-        $stmt = $pdo->prepare("UPDATE incidencias SET estado = :estado WHERE id = :id");
-        $stmt->execute([
-            ':estado' => $estado,
-            ':id'     => $id
-        ]);
+        if ($estado === 'En Proceso' && $incidencia['tecnico_id'] === null) {
+            $error = "No puedes poner la incidencia en proceso si no tiene un técnico asignado.";
+        } else {
+            $stmt = $pdo->prepare("UPDATE incidencias SET estado = :estado WHERE id = :id");
+            $stmt->execute([
+                ':estado' => $estado,
+                ':id'     => $id
+            ]);
 
-        header("Location: index.php");
-        exit;
+            header("Location: index.php");
+            exit;
+        }
+    } else {
+        $error = "Selecciona un estado válido.";
     }
 }
 
-$sel_pendiente  = $incidencia['estado'] === 'Pendiente'  ? 'selected' : '';
-$sel_en_proceso = $incidencia['estado'] === 'En Proceso' ? 'selected' : '';
-$sel_resuelta   = $incidencia['estado'] === 'Resuelta'   ? 'selected' : '';
+$sel_pendiente  = $estado_seleccionado === 'Pendiente'  ? 'selected' : '';
+$sel_en_proceso = $estado_seleccionado === 'En Proceso' ? 'selected' : '';
+$sel_resuelta   = $estado_seleccionado === 'Resuelta'   ? 'selected' : '';
 
 $id_incidencia = htmlspecialchars($incidencia['id']);
 $titulo        = htmlspecialchars($incidencia['titulo']);
@@ -74,13 +84,16 @@ $estado_actual = htmlspecialchars($incidencia['estado']);
                 <option value="En Proceso" <?= $sel_en_proceso ?>>En Proceso</option>
                 <option value="Resuelta" <?= $sel_resuelta ?>>Resuelta</option>
             </select>
+            <?php if ($error !== ''): ?>
+                <span style="color: red; margin-left: 8px;"><?= htmlspecialchars($error) ?></span>
+            <?php endif; ?>
         </p>
 
         <button type="submit">Guardar cambios</button>
 
     </form> 
         <br><br>
-        <a href="index.php">Volver al listado</a>
+        <a href="index.php">Volver al inicio</a>
         
 </body>
 
